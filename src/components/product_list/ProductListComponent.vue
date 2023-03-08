@@ -12,6 +12,12 @@
           <div class="product-title">
             <h1>{{ item.name }}</h1>
           </div>
+          <div class="product-price">
+            {{ item.price }}
+          </div>
+          <div class="product-stock">
+            {{ item.stock }}
+          </div>
         </div>
       </div>
     </div>
@@ -22,11 +28,13 @@
 import { onMounted, ref } from "vue";
 import { listProducts } from "@/api/product";
 import { toRefs, reactive, computed } from "vue";
+import { useRouter } from "vue-router";
 
 export default {
   name: "ProductList",
 
   setup() {
+    const router = useRouter();
     const total = ref(50);
     const PageState = reactive({
       pageSize: 8,
@@ -43,6 +51,11 @@ export default {
     });
 
     // methods
+    function handleClick(item) {
+      console.log(item)
+      router.push({ name: "content", params: {"id" : item.id}})
+    }
+
     function loadingProduct() {
       listProducts({
         limit: PageState.pageSize,
@@ -66,6 +79,7 @@ export default {
       ...toRefs(PageState),
       ...toRefs(productList),
       currentTotal,
+      handleClick,
       loadingProduct,
     };
   },
