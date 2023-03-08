@@ -1,25 +1,29 @@
 <template>
-    <div class="aside-view">
-        <div class="aside-view">
-          <div class="aside-header"></div>
-      
-          <div class="aside-main-content">
-            <Aside-Category :categorylist="catagories"></Aside-Category>
+  <div class="category-view">
+    <div
+      class="category-list"
+      v-for="(item, index) in catagories"
+      :key="index"
+      @click="handleClick(item)"
+    >
+      <div class="category-card">
+        <div class="pic"></div>
+        <div class="category-info">
+          <div class="category-title">
+            <h1>{{ item.name }}</h1>
           </div>
         </div>
+      </div>
     </div>
+  </div>
 </template>
 
 <script>
 import { onMounted, ref } from "vue";
 import { listProductCategories } from "@/api/category";
-import AsideCategory from "@/components/aside/AsideCategory.vue";
 
 export default {
-  name: "AsideComponent",
-  components: {
-    AsideCategory,
-  },
+  name: "CategoryComponent",
   setup() {
     const chooseType = ref(true);
     const catagories = ref([]);
@@ -65,34 +69,32 @@ export default {
 </script>
 
 <style scoped>
-div.aside-view {
-    width: 100%;
-  /* margin: 1.5rem 0 0 1.5rem; */
-  padding: 2rem;
-  height: 100%;
+div.category-view {
+  width: 100%;
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  justify-content: center;
 }
 
-div.aside-header {
-  margin-bottom: 1rem;
+div.category-card {
+  border-radius: 6px;
+  width: 7rem;
+  height: 7rem;
   padding: 2rem;
+  margin: 0.5rem;
   display: flex;
   flex-direction: column;
-  justify-content: space-between;
-  align-items: center;
-  border-radius: 6px;
-  background-color: white;
-  box-shadow: 0 2px 6px rgba(26, 31, 28, 0.08);
+  /* border: 1px solid var(--border-color); */
+  background-color: var(--category-card-color);
+  box-shadow: 0 3px 6px rgba(29, 30, 29, 0.08);
 }
-div.aside-main-content{
-  margin-bottom: 1rem;
-  padding: 2rem;
-  display: flex;
-  flex-direction: column;
-  justify-content: space-between;
-  align-items: center;
-  border-radius: 6px;
-  background-color: white;
-  box-shadow: 0 2px 6px rgba(26, 31, 28, 0.08);
-    width: 100%;
+div.category-card:hover {
+  cursor: pointer;
+  /* box-shadow: 0 0 1px 1px var(--border-shadow-color-1), 0 0 4px 6px var(--border-shadow-color-2); */
+  transition: 150ms;
+  /* transform: translate3d(-1px, -3px, -2px); */
+  /* box-shadow: 0 5px 15px 0 rgba(0,0,0,0.08); */
+  box-shadow: 0 5px 18px 0 rgba(0, 0, 0, 0.08);
 }
 </style>

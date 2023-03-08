@@ -25,11 +25,12 @@ div.header-view {
     padding-right: 2rem;
     display: flex;
     justify-content: space-between;
-    background-color:   rgba(255, 255, 255, 0.9);
+    /* background-color:   rgba(255, 255, 255, 0.9); */
     border-bottom: 1px solid var(--border-color);
-    box-shadow: 0 2px 6px rgba(26,31,28,.08);
+    /* box-shadow: 0 2px 6px rgba(26,31,28,.08); */
     font-weight: bold;
     font-size: medium;
+    margin: 0 2rem;
 }
 div.logo {
     display: flex;

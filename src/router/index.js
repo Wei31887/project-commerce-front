@@ -8,9 +8,9 @@ const routes = [
     component: HomeView,
     children: [
       {
-        path: '/product',
+        path: '/',
         name: 'product',
-        component: () => import('../views/product/ProductView.vue')
+        component: () => import('../views/home_page/ProductView.vue')
       },
     ],
   },
@@ -29,7 +29,7 @@ const router = createRouter({
 
 router.beforeEach((to, from, next) => {
   if (to.name == "home") {
-    next({ path: "/product" });
+    next({ path: "/" });
   }
   next();
 });

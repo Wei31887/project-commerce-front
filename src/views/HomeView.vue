@@ -51,6 +51,7 @@ header.header {
 }
 
 main.content-container {
+  /* padding: 1rem; */
   width: var(--main-container-width);
   display: flex;
   position: relative;
