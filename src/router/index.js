@@ -1,35 +1,41 @@
-import { createRouter, createWebHistory } from 'vue-router'
-import HomeView from '../views/HomeView.vue'
+import { createRouter, createWebHistory } from "vue-router";
+import HomeView from "../views/HomeView.vue";
 
 const routes = [
   {
-    path: '/',
-    name: 'home',
+    path: "/",
+    name: "home",
     component: HomeView,
     children: [
       {
-        path: '/',
-        name: 'product',
-        component: () => import('../views/home_page/ProductView.vue')
+        path: "/",
+        name: "product",
+        component: () => import("../views/home_page/ProductView.vue"),
       },
       {
-        path: 'content/:id',
-        name: 'content',
-        component: () => import('../views/product/ProductContentView.vue')
+        path: "content/:id",
+        name: "content",
+        component: () => import("../views/product/ProductContentView.vue"),
+      },
+      {
+        path: "cart",
+        name: "cart",
+        component: () => import("../views/cart/CartView.vue"),
       },
     ],
   },
   {
-    path: '/login',
-    name: 'login',
-    component: () => import(/* webpackChunkName: "login" */ '../views/login/LoginView.vue')
-  }
-]
+    path: "/login",
+    name: "login",
+    component: () =>
+      import(/* webpackChunkName: "login" */ "../views/login/LoginView.vue"),
+  },
+];
 
 const router = createRouter({
   history: createWebHistory(),
-  routes
-})
+  routes,
+});
 
 router.beforeEach((to, from, next) => {
   if (to.name == "home") {
@@ -38,4 +44,4 @@ router.beforeEach((to, from, next) => {
   next();
 });
 
-export default router
+export default router;

@@ -7,7 +7,9 @@
       @click="handleClick(item)"
     >
       <div class="product-card">
-        <div class="pic"></div>
+        <div class="pic">
+          <img :src="BASE_API + '/' + item.image" :alt="item.name">
+        </div>
         <div class="product-info">
           <div class="product-title">
             <h1>{{ item.name }}</h1>
@@ -25,10 +27,12 @@
 </template>
 
 <script>
+import { BASE_API } from "@/config/config.js"
 import { onMounted, ref } from "vue";
 import { listProducts } from "@/api/product";
 import { toRefs, reactive, computed } from "vue";
 import { useRouter } from "vue-router";
+import { ElNotification } from "element-plus";
 
 export default {
   name: "ProductList",
@@ -38,7 +42,7 @@ export default {
     const total = ref(50);
     const PageState = reactive({
       pageSize: 8,
-      currentPage: 1,
+      currentPage: 0,
     });
 
     const currentTotal = computed(() => {
@@ -64,6 +68,12 @@ export default {
         .then((res) => {
           if (res.status == 200) {
             productList.products = res.data["product"];
+            console.log(productList.products)
+          } else {
+            ElNotification({
+              title: "Product",
+              message: "Product",
+            })
           }
         })
         .catch((err) => {
@@ -81,6 +91,7 @@ export default {
       currentTotal,
       handleClick,
       loadingProduct,
+      BASE_API
     };
   },
 };
@@ -98,9 +109,9 @@ div.product-list-view {
 
 div.product-card {
   border-radius: 6px;
-  width: 12rem;
-  height: 14rem;
-  padding: 2rem;
+  width: 14rem;
+  height: 22rem;
+  padding: 1rem;
   margin: 1rem;
   display: flex;
   flex-direction: column;

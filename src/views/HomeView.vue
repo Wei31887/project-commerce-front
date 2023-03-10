@@ -51,7 +51,6 @@ header.header {
 }
 
 main.content-container {
-  /* padding: 1rem; */
   width: var(--main-container-width);
   display: flex;
   position: relative;
@@ -60,7 +59,7 @@ main.content-container {
   min-height: 100vh;
   display: flex;
   flex-direction: column;
-  justify-content: space-between;
+  justify-content: stretch;
   width: 100%;
   position: relative;
   background-color: var(--background-color);
