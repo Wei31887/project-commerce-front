@@ -7,7 +7,7 @@
     <main class="content-container">
       <!-- page header -->
       <div class="page-header" ref="pageheader">
-        <Page-Header></Page-Header>
+        <!-- <Page-Header></Page-Header> -->
       </div>
       <!-- content -->
       <div class="content">
@@ -24,14 +24,14 @@
 <script>
 import HeaderComponent from "@/components/header/HeaderComponent.vue";
 import FooterComponent from "@/components/footer/FooterComponent.vue";
-import PageHeader from "@/components/page_header/PageHeaderComponent.vue";
+// import PageHeader from "@/components/page_header/PageHeaderComponent.vue";
 
 export default {
   name: "HomeView",
   components: {
     HeaderComponent,
     FooterComponent,
-    PageHeader
+    // PageHeader
   },
   setup() {},
 };

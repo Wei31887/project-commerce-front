@@ -1,5 +1,6 @@
 import { createRouter, createWebHistory } from "vue-router";
 import HomeView from "../views/HomeView.vue";
+import { getAccessToken } from "@/utils/token";
 
 const routes = [
   {
@@ -22,6 +23,11 @@ const routes = [
         name: "cart",
         component: () => import("../views/cart/CartView.vue"),
       },
+      {
+        path: "order",
+        name: "order",
+        component: () => import("../views/order/OrderView.vue"),
+      },
     ],
   },
   {
@@ -40,6 +46,12 @@ const router = createRouter({
 router.beforeEach((to, from, next) => {
   if (to.name == "home") {
     next({ path: "/" });
+  }
+  if (to.name == "order" || to.name == "cart") {
+    const token = getAccessToken();
+    if (!token) {
+      next({ name: "login"})
+    }
   }
   next();
 });

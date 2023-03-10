@@ -6,7 +6,7 @@
     </div>
     <div class="header-cart">
       <router-link :to="{ name: 'cart' }"> Cart </router-link>
-      <router-link :to="{ name: 'home' }"> Order </router-link>
+      <router-link :to="{ name: 'order' }"> Order </router-link>
       <router-link :to="{ name: 'home' }"> User </router-link>
     </div>
   </div>
@@ -27,9 +27,8 @@ div.header-view {
   display: flex;
   flex-direction: row;
   justify-content: space-between;
-  /* background-color:   rgba(255, 255, 255, 0.9); */
+  background-color: white;
   border-bottom: 1px solid var(--border-color);
-  /* box-shadow: 0 2px 6px rgba(26,31,28,.08); */
   font-weight: bold;
   font-size: medium;
   margin: 0 2rem;

@@ -1,7 +1,6 @@
 <template>
   <div class="cart-content-view">
     <div class="cart-title cart">
-      <el-col :span="1" class="select"></el-col>
       <el-col :span="8" class="name"><h3>Product Name</h3></el-col>
       <el-col :span="4" class="price"><h3>Amount</h3></el-col>
       <el-col :span="4" class="count"><h3>Count</h3></el-col>
@@ -14,11 +13,6 @@
         v-for="(item, index) in cartItems"
         :key="index"
       >
-        <el-col :span="1" class="cart-item-detail-select">
-          <el-radio-group v-model="item.id">
-            <el-radio label="1" size="large">Select</el-radio>
-          </el-radio-group>
-        </el-col>
         <el-col :span="8" class="cart-item-detail-name">
           <h1>{{ item.name }}</h1></el-col
         >
@@ -38,11 +32,11 @@
     </div>
     <div class="cart-order cart">
       <div class="order-info">
-        <el-statistic title="Total Price" :value="amount" />
-        <el-statistic title="Total count" :value="count" />
+        <el-statistic title="Total Price" :value="total_cart.amount" />
+        <el-statistic title="Total count" :value="total_cart.count" />
       </div>
       <div class="order-operation">
-        <el-button @click="handleCart()">Order</el-button>
+        <el-button @click="handleOrder()">Order</el-button>
       </div>
     </div>
   </div>
@@ -50,8 +44,9 @@
 
 <script>
 import { BASE_API } from "@/config/config.js";
-import { ref, onMounted, reactive, toRefs } from "vue";
+import { ref, onMounted, reactive, toRefs, computed } from "vue";
 import { listCartItems, deleteCartItem } from "@/api/cart";
+import { addOrder } from "@/api/order";
 import { useRouter } from "vue-router";
 import { getAccessToken } from "@/utils/token";
 import { ElNotification } from "element-plus";
@@ -62,13 +57,22 @@ export default {
     const router = useRouter();
     const cartItems = ref([]);
     const purchaseState = reactive({
-      count: 0,
-      amount: 0,
-      orderItem: [],
+      orderItems: [],
+    });
+
+    const total_cart = computed(() => {
+      let resCart = {
+        count: 0,
+        amount: 0,
+      };
+      cartItems.value.forEach((item) => {
+        resCart.count += item.count;
+        resCart.amount += parseFloat(item.price) * item.count;
+      });
+      return resCart;
     });
 
     function handleDelete(id) {
-      console.log(id);
       deleteCartItem({ cart_item_id: id })
         .then((res) => {
           if (res.status == 200) {
@@ -85,12 +89,28 @@ export default {
         });
     }
 
-    function handleCart() {
+    function handleOrder() {
       const token = getAccessToken();
       if (!token) {
         router.push({ name: "login" });
         return;
       }
+      addOrder({
+        request_order_item: purchaseState.orderItems,
+      })
+        .then((res) => {
+          if (res.status == 200) {
+            ElNotification({
+              title: "Success",
+              type: "success",
+              message: "Sucess to order",
+            });
+            router.push({ name: "order" });
+          }
+        })
+        .catch((err) => {
+          console.log(err);
+        });
     }
 
     function loadingCart() {
@@ -98,6 +118,12 @@ export default {
         console.log(res.data);
         if (res.status == 200) {
           cartItems.value = res.data.products;
+          cartItems.value.forEach((item) => {
+            purchaseState.orderItems.push({
+              product_id: item.product_id,
+              count: item.count,
+            });
+          });
         }
       });
     }
@@ -110,8 +136,9 @@ export default {
       ...toRefs(purchaseState),
       cartItems,
       BASE_API,
-      handleCart,
+      handleOrder,
       handleDelete,
+      total_cart,
     };
   },
 };
