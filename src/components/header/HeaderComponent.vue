@@ -21,17 +21,17 @@ export default {
 
 <style scoped>
 div.header-view {
-  height: var(--header-height);
+  height: 100%;
   padding-left: 2rem;
   padding-right: 2rem;
   display: flex;
   flex-direction: row;
   justify-content: space-between;
-  background-color: white;
-  border-bottom: 1px solid var(--border-color);
+  background-color: var(--header-color);
+  /* border-bottom: 1px solid var(--border-color); */
   font-weight: bold;
   font-size: medium;
-  margin: 0 2rem;
+  /* margin: 0 2rem; */
 }
 div.logo {
   display: flex;

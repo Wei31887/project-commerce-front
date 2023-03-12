@@ -31,10 +31,27 @@ const routes = [
     ],
   },
   {
-    path: "/login",
-    name: "login",
-    component: () =>
-      import(/* webpackChunkName: "login" */ "../views/login/LoginView.vue"),
+    path: "/user",
+    name: "user",
+    component: () => import("../views/login/LoginIndexView.vue"),
+    children: [
+      {
+        path: "login",
+        name: "login",
+        component: () =>
+          import(
+            /* webpackChunkName: "login" */ "../views/login/LoginView.vue"
+          ),
+      },
+      {
+        path: "create",
+        name: "create",
+        component: () =>
+          import(
+            /* webpackChunkName: "create" */ "../views/login/CreateUserView.vue"
+          ),
+      },
+    ],
   },
 ];
 
@@ -50,7 +67,7 @@ router.beforeEach((to, from, next) => {
   if (to.name == "order" || to.name == "cart") {
     const token = getAccessToken();
     if (!token) {
-      next({ name: "login"})
+      next({ name: "login" });
     }
   }
   next();

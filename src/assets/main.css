@@ -9,12 +9,15 @@ body,
     text-align: center;
     font-family: 'Microsoft YaHei', 'Helvetica Neue', Helvetica, 'PingFang SC', 'Hiragino Sans GB',
     '微软雅黑', Arial, sans-serif;
-    --background-color: rgb(255, 255, 255);
+    --background-color:  rgb(240, 240, 239);
     --div-color: rgb(241, 241, 241) ;
     --border-color: rgb(162, 162, 162);
-    --header-color: rgb(231, 231, 227);
+    --header-color: white;
     --footer-color: rgb(162, 162, 162);
-    --login-background-color: rgb(105, 133, 137);
+    --login-background-color: rgb(242, 246, 238);
+    --product-background-color: white;
+    --product-card-color: white;
+    --category-card-color: white;
 
     /*  */
     --header-height: 5rem;

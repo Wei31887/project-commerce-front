@@ -25,7 +25,7 @@
         <el-col :span="4" class="total-count"></el-col>
         <el-col :span="3" class="operation">
           <div class="cart-item-operation">
-            <el-button @click="handleDelete(item.id)">Delete Item</el-button>
+            <el-button text type="danger" @click="handleDelete(item.id)">Delete Item</el-button>
           </div>
         </el-col>
       </div>

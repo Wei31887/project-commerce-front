@@ -8,28 +8,55 @@
           :alt="product.name"
         />
       </div>
-      <div class="product-info">
-        <div class="product-detail">
-          <h1>{{ product.name }}</h1>
-          <div class="rate-block">
-            <el-rate v-model="value1" />
+      <div class="product-detail-order">
+        <div class="product-info">
+          <div class="product-detail">
+            <div class="product-detail-name">
+              <h1>{{ product.name }}</h1>
+            </div>
+            <div class="rate-stock">
+              <el-rate v-model="value1" />
+              <el-divider direction="vertical" />
+              <span>{{ product.sell }} Sold</span>
+              <el-divider direction="vertical" />
+              <span>{{ product.sell }} Comments</span>
+            </div>
+            <el-divider />
+            <div
+              v-if="product.on_sell == 1"
+              class="product-detail-price product-detail-item"
+            >
+              <span class="price">${{ product.price }}</span>
+            </div>
+            <div v-else class="product-detail-price product-detail-item">
+              <span class="origin-price">${{ product.price }}</span>
+              <span class="price">${{ product.price * product.on_sell }}</span>
+              <span class="on-sell">{{ product.on_sell }}折</span>
+            </div>
+            <div class="product-detail-description product-detail-item">
+              <div class="detail-title">Description</div>
+              <div class="description">
+                {{ product.description }}
+              </div>
+            </div>
+            <div class="product-detail-count product-detail-item">
+              <div class="detail-title">Count</div>
+              <div class="count">
+                <el-input-number v-model="count" size="large" />
+                <span class="stock">we still have: {{ product.stock }} </span>
+              </div>
+            </div>
           </div>
-
-          {{ product.price }}
-          {{ product.stock }}
-          {{ product.sell }}
         </div>
-        <div class="product-description">
-          {{ product.description }}
-        </div>
-      </div>
-      <div class="product-order">
-        <el-input-number v-model="count" size="large" />
-        <div class="add-cart">
-          <el-button @click="handleCart()">Add to cart</el-button>
-        </div>
-        <div class="add-cart">
-          <el-button>Buy</el-button>
+        <div class="product-order">
+          <div class="add-cart button">
+            <el-button size="large" @click="handleCart()"
+              >Add to cart</el-button
+            >
+          </div>
+          <div class="buy button">
+            <el-button type="primary" size="large">Buy</el-button>
+          </div>
         </div>
       </div>
     </div>
@@ -53,7 +80,7 @@ export default {
     const router = useRouter();
     const product = ref({});
     const purcahseState = reactive({
-      count: 0,
+      count: 1,
       productId: 0,
     });
 
@@ -114,13 +141,26 @@ export default {
 <style scoped>
 div.product-content-view {
   padding: 2rem;
+  height: 100%;
 }
 
 div.product-overview {
+  position: relative;
   display: flex;
   flex-direction: row;
-  justify-content: center;
+  background-color: var(--product-background-color);
   width: 100%;
+  min-height: 80vh;
+  border-radius: 6px;
+}
+
+div.product-image {
+  position: relative;
+  left: 0;
+  flex: 3;
+  display: flex;
+  justify-content: center;
+  align-items: center;
 }
 
 div.product-image-view {
@@ -128,13 +168,69 @@ div.product-image-view {
   height: 100%;
 }
 
-div.product-image {
-  width: 40%;
+div.product-detail-name {
+  text-align: start;
 }
-div.product-info {
-  width: 30%;
+
+div.product-detail-item {
+  display: flex;
+  flex-direction: row;
+  padding: 0 2rem 2rem 0;
 }
+
+div.detail-title {
+  text-align: start;
+  width: 200px;
+}
+
+div.product-detail-order {
+  display: flex;
+  flex-direction: column;
+  flex: 5;
+  padding: 2rem;
+}
+
+div.rate-stock {
+  display: flex;
+  align-items: center;
+}
+
+div.product-detail-price {
+  background-color: var(--background-color);
+  padding: 2rem;
+  margin: 0 1rem 1rem 0rem;
+  border-radius: 6px;
+  display: flex;
+  align-items: center;
+}
+
 div.product-order {
-  width: 30%;
+  display: flex;
+  flex-direction: row;
 }
+
+.origin-price {
+  text-decoration: line-through;
+}
+
+.price {
+  font-size: larger;
+  color: rgb(33, 52, 80);
+  font-weight: bold;
+  padding: 0 1rem;
+}
+
+.on-sell {
+  font-size: larger;
+  color: rgb(33, 52, 80);
+  font-weight: bold;
+}
+.stock{
+  padding: 1rem;
+}
+
+.button {
+  padding: 1rem 1rem 1rem 0;
+}
+
 </style>

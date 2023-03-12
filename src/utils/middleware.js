@@ -45,7 +45,6 @@ service.interceptors.response.use(
       message: error.response.status + ", " + error.response.statusText,
       duration: 3000,
     });
-    console.log(error.response.data);
     return Promise.reject(error);
   }
 );

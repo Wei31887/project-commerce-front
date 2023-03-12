@@ -8,6 +8,14 @@ export function loginByUser(data) {
   })
 }
 
+export function CreateUser(data) {
+  return request({
+    url: '/user',
+    method: 'post',
+    data: data
+  })
+}
+
 export function updatePassword(data) {
   return request({
     url: '/user/password/update',

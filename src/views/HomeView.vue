@@ -5,14 +5,7 @@
       <Header-Component></Header-Component>
     </header>
     <main class="content-container">
-      <!-- page header -->
-      <div class="page-header" ref="pageheader">
-        <!-- <Page-Header></Page-Header> -->
-      </div>
-      <!-- content -->
-      <div class="content">
-        <router-view></router-view>
-      </div>
+      <router-view></router-view>
     </main>
     <!-- footer -->
     <footer class="footer">
@@ -24,14 +17,12 @@
 <script>
 import HeaderComponent from "@/components/header/HeaderComponent.vue";
 import FooterComponent from "@/components/footer/FooterComponent.vue";
-// import PageHeader from "@/components/page_header/PageHeaderComponent.vue";
 
 export default {
   name: "HomeView",
   components: {
     HeaderComponent,
     FooterComponent,
-    // PageHeader
   },
   setup() {},
 };
@@ -48,15 +39,14 @@ header.header {
   z-index: 5;
   position: sticky;
   top: 0px;
+  height: var(--header-height);
 }
 
 main.content-container {
-  width: var(--main-container-width);
-  display: flex;
   position: relative;
-  overflow: scroll;
   z-index: 1;
-  min-height: 100vh;
+  min-height: 90%;
+  /* height: calc(100vh-var(--header-height)); */
   display: flex;
   flex-direction: column;
   justify-content: stretch;

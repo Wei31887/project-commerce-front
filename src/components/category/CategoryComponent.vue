@@ -82,7 +82,7 @@ div.category-card {
   width: 7rem;
   height: 7rem;
   padding: 2rem;
-  margin: 0.5rem;
+  margin: 1rem;
   display: flex;
   flex-direction: column;
   /* border: 1px solid var(--border-color); */
