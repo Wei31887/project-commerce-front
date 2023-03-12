@@ -46,7 +46,6 @@ main.content-container {
   position: relative;
   z-index: 1;
   min-height: 90%;
-  /* height: calc(100vh-var(--header-height)); */
   display: flex;
   flex-direction: column;
   justify-content: stretch;

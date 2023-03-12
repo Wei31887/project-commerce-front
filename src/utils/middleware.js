@@ -3,6 +3,9 @@ import store from "@/store";
 import { getAccessToken } from "@/utils/token";
 import { ElNotification } from "element-plus";
 import { BASE_API } from "@/config/config";
+// import { useRouter } from "vue-router";
+
+// const router = useRouter()
 
 const service = axios.create({
   baseURL: BASE_API,
@@ -28,17 +31,13 @@ service.interceptors.response.use(
   (response) => {
     if (response.status == 200) {
       return response;
-    } else {
-      ElNotification({
-        title: "Error",
-        message: response.data.error,
-        type: "error",
-        duration: 2000,
-      });
-      return Promise.reject(response);
-    }
+    } 
   },
   (error) => {
+    if (error.response.status == 401) {
+      return error.response;
+      // router.push({name: "login"})
+    } 
     ElNotification({
       title: "Error",
       type: "error",

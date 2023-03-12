@@ -79,13 +79,14 @@ div.category-view {
 
 div.category-card {
   border-radius: 6px;
-  width: 7rem;
-  height: 7rem;
+  width: 10rem;
+  height: 10rem;
   padding: 2rem;
-  margin: 1rem;
+  margin: 0.5rem;
   display: flex;
   flex-direction: column;
-  /* border: 1px solid var(--border-color); */
+  align-items: center;
+  justify-content: center;
   background-color: var(--category-card-color);
   box-shadow: 0 3px 6px rgba(29, 30, 29, 0.08);
 }
