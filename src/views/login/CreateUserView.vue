@@ -25,6 +25,14 @@
       <el-input type="password" placeholder="輸入密碼" v-model="form.password">
       </el-input>
     </el-form-item>
+    <el-form-item prop="checkPassword" label="確認密碼">
+      <el-input
+        type="password"
+        placeholder="輸入確認密碼"
+        v-model="form.checkPassword"
+      >
+      </el-input>
+    </el-form-item>
 
     <el-form-item>
       <el-button type="info" size="large" v-on:click="handleCreate()"
@@ -51,6 +59,7 @@ export default {
         username: "",
         full_name: "",
         password: "",
+        checkPassword: "",
         email: "",
       },
     });

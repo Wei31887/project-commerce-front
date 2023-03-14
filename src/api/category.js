@@ -1,10 +1,9 @@
 import request from "@/utils/middleware";
 
-export function listProductCategories(data) {
+export function listProductCategories() {
   return request({
-    url: '/product/category',
+    url: '/category',
     method: 'post',
-    data: data
   })
 }
 

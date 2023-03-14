@@ -12,7 +12,7 @@
     </div>
     <div class="product-list">
       <h2 class="category_title">Hit Products</h2>
-      <Product-List></Product-List>
+      <Hit-Product-List></Hit-Product-List>
     </div>
   </div>
 </template>
@@ -20,13 +20,13 @@
 <script>
 import { BASE_API } from "@/config/config.js";
 import CategoryComponent from "@/components/category/CategoryComponent.vue";
-import ProductList from "@/components/product_list/ProductListComponent.vue";
+import HitProductList from "@/components/product_list/HitProductListComponent.vue";
 
 export default {
   name: "ProductView",
   components: {
     CategoryComponent,
-    ProductList,
+    HitProductList,
   },
   setup() {
     return {

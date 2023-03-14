@@ -10,7 +10,7 @@
         <div class="pic"></div>
         <div class="category-info">
           <div class="category-title">
-            <h1>{{ item.name }}</h1>
+            <h2>{{ item.name }}</h2>
           </div>
         </div>
       </div>
@@ -21,10 +21,12 @@
 <script>
 import { onMounted, ref } from "vue";
 import { listProductCategories } from "@/api/category";
+import { useRouter } from "vue-router";
 
 export default {
   name: "CategoryComponent",
   setup() {
+    const router = useRouter()
     const chooseType = ref(true);
     const catagories = ref([]);
 
@@ -40,6 +42,11 @@ export default {
         .catch((err) => {
           console.log(err);
         });
+    }
+
+    function handleClick(item) {
+      console.log(item);
+      router.push({ name: "category", params: {"category": item.id}});
     }
 
     function handleClickType() {
@@ -60,6 +67,7 @@ export default {
 
     return {
       chooseType,
+      handleClick,
       handleClickType,
       handleClickCatalog,
       catagories,
@@ -79,8 +87,8 @@ div.category-view {
 
 div.category-card {
   border-radius: 6px;
-  width: 10rem;
-  height: 10rem;
+  width: 12rem;
+  height: 6rem;
   padding: 2rem;
   margin: 0.5rem;
   display: flex;
@@ -92,10 +100,7 @@ div.category-card {
 }
 div.category-card:hover {
   cursor: pointer;
-  /* box-shadow: 0 0 1px 1px var(--border-shadow-color-1), 0 0 4px 6px var(--border-shadow-color-2); */
   transition: 150ms;
-  /* transform: translate3d(-1px, -3px, -2px); */
-  /* box-shadow: 0 5px 15px 0 rgba(0,0,0,0.08); */
   box-shadow: 0 5px 18px 0 rgba(0, 0, 0, 0.08);
 }
 </style>

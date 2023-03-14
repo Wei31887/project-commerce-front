@@ -31,7 +31,9 @@
             <div v-else class="product-detail-price product-detail-item">
               <span class="origin-price">${{ product.price }}</span>
               <span class="price">${{ product.price * product.on_sell }}</span>
-              <span class="on-sell">{{ product.on_sell }}折</span>
+              <el-tag class="mx-1" effect="dark">
+                {{ product.on_sell }}折
+              </el-tag>
             </div>
             <div class="product-detail-description product-detail-item">
               <div class="detail-title">Description</div>
@@ -176,6 +178,7 @@ div.product-detail-item {
   display: flex;
   flex-direction: row;
   padding: 0 2rem 2rem 0;
+  /* flex-wrap: wrap; */
 }
 
 div.detail-title {
@@ -195,6 +198,12 @@ div.rate-stock {
   align-items: center;
 }
 
+div.description {
+  display: contents;
+  /* word-wrap:break-word; */
+  word-wrap:break-word;
+  text-align: left;
+}
 div.product-detail-price {
   background-color: var(--background-color);
   padding: 2rem;
@@ -225,12 +234,11 @@ div.product-order {
   color: rgb(33, 52, 80);
   font-weight: bold;
 }
-.stock{
+.stock {
   padding: 1rem;
 }
 
 .button {
   padding: 1rem 1rem 1rem 0;
 }
-
 </style>

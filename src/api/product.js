@@ -7,6 +7,20 @@ export function listProducts(data) {
     data: data
   })
 }
+export function listHitProducts(data) {
+  return request({
+    url: '/product/hit',
+    method: 'post',
+    data: data
+  })
+}
+export function listProductByCategory(data) {
+  return request({
+    url: '/product/category',
+    method: 'post',
+    data: data
+  })
+}
 
 export function GetProducts(data) {
   return request({
