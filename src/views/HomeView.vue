@@ -31,7 +31,6 @@ export default {
 <style>
 div.container {
   position: relative;
-  height: 100%;
   background-color: var(--background-color);
 }
 
@@ -45,7 +44,8 @@ header.header {
 main.content-container {
   position: relative;
   z-index: 1;
-  min-height: 90%;
+  min-height: 90vh;
+  height: 100%;
   display: flex;
   flex-direction: column;
   justify-content: stretch;

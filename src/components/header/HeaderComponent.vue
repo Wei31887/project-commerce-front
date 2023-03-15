@@ -1,39 +1,65 @@
 <template>
   <div class="header-view">
-    <div class="logo"></div>
-    <div class="content">
-      <router-link :to="{ name: 'home' }">
-        <span>Products </span>
-      </router-link>
-    </div>
+    <div class="header-upper">
+      <div class="logo"></div>
+      <div class="content">
+        <router-link :to="{ name: 'home' }">
+          <span>Products </span>
+        </router-link>
+      </div>
 
-    <div class="search-bar">
-      <input
-        class="search-input"
-        type="text"
-        v-model="searchQuery"
-        @input="handleInput"
-        placeholder="Search products..."
-      />
-      <!-- <Search></Search> -->
-      <ul v-show="showResults">
-        <li v-for="result in searchResults" :key="result.id">
-          {{ result.name }}
+      <div class="search-bar">
+        <input
+          class="search-input"
+          type="text"
+          v-model="searchQuery"
+          @input="handleInput"
+          placeholder="Search products..."
+        />
+        <!-- <Search></Search> -->
+        <ul class="upper" v-show="showResults">
+          <li v-for="result in searchResults" :key="result.id">
+            {{ result.name }}
+          </li>
+        </ul>
+      </div>
+
+      <div class="header-cart">
+        <router-link :to="{ name: 'account' }"
+          ><el-icon size="25px" style="padding-right: 10px"><User /></el-icon>
+          <span>Account</span>
+        </router-link>
+        <router-link :to="{ name: 'cart' }">
+          <el-icon size="25px" style="padding-right: 10px"
+            ><ShoppingCart
+          /></el-icon>
+          <span>Cart </span>
+        </router-link>
+      </div>
+    </div>
+    <div class="header-lower">
+      <ul class="lower">
+        <li>
+          <router-link :to="{ name: 'category', params: { category: 1 } }"
+            >Protein Powder</router-link
+          >
+        </li>
+        <li>
+          <router-link :to="{ name: 'category', params: { category: 2 } }"
+            >Protein Bar</router-link
+          >
+        </li>
+        <li>
+          <router-link :to="{ name: 'category', params: { category: 3 } }"
+            >Accessories</router-link
+          >
+        </li>
+        <li>
+          <router-link :to="{ name: 'category', params: { category: 4 } }"
+            >Others</router-link
+          >
         </li>
       </ul>
-    </div>
-
-    <div class="header-cart">
-      <router-link :to="{ name: 'home' }"
-        ><el-icon size="25px" style="padding-right: 10px"><User /></el-icon>
-        <span>Account</span>
-      </router-link>
-      <router-link :to="{ name: 'cart' }">
-        <el-icon size="25px" style="padding-right: 10px"
-          ><ShoppingCart
-        /></el-icon>
-        <span>Cart </span>
-      </router-link>
     </div>
   </div>
 </template>
@@ -61,15 +87,27 @@ export default {
 
 <style scoped>
 div.header-view {
-  height: 100%;
   display: flex;
-  flex-direction: row;
-  justify-content: space-between;
-  align-items: center;
-  background-color: var(--header-color);
+  flex-direction: column;
+  height: 100%;
+  /* justify-content: space-between; */
+  /* align-items: center; */
+  background-color: var(--header-upper-color);
   font-weight: bold;
   font-size: medium;
-  padding: 0 1rem;
+}
+
+div.header-upper {
+  flex: 2;
+  display: flex;
+  align-items: center;
+  justify-content: space-around;
+}
+div.header-lower {
+  flex: 1;
+  background-color: var(--header-lower-color);
+  display: flex;
+  justify-content: space-around;
 }
 div.logo {
   display: flex;
@@ -104,15 +142,25 @@ input.search-input {
   border: 0.8px solid;
   border-radius: 2px;
 }
-ul {
+
+ul.lower {
+  z-index: 999;
+
+  /* border: 1px solid #ccc; */
+  /* box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2); */
+  list-style-type: none;
+  padding: 0;
+  margin: 0;
+  display: flex;
+  justify-content: space-around;
+  align-items: stretch;
+}
+ul.upper {
   position: absolute;
   top: 100%;
   left: 0;
   right: 0;
   z-index: 999;
-  background-color: white;
-  border: 1px solid #ccc;
-  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
   list-style-type: none;
   padding: 0;
   margin: 0;

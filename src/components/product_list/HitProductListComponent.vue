@@ -41,7 +41,6 @@ export default {
     const productLimt = ref(8)
     const productList = reactive({
       products: [],
-      categoryId: 0,
     });
 
     // methods
@@ -57,7 +56,6 @@ export default {
         .then((res) => {
           if (res.status == 200) {
             productList.products = res.data["product"];
-            console.log(productList.products)
           } else {
             ElNotification({
               title: "Product",

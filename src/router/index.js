@@ -24,15 +24,28 @@ const routes = [
         component: () => import("../views/content/ProductContentView.vue"),
       },
       {
+        path: "account",
+        name: "account",
+        component: () => import("../views/account/AccountView.vue"),
+        children: [
+          {
+            path: "order",
+            name: "order",
+            component: () => import("../views/account/order/OrderView.vue"),
+          },
+          {
+            path: "information",
+            name: "information",
+            component: () => import("../views/account/information/UserInformationView.vue"),
+          },
+        ]
+      },
+      {
         path: "cart",
         name: "cart",
         component: () => import("../views/cart/CartView.vue"),
       },
-      {
-        path: "order",
-        name: "order",
-        component: () => import("../views/order/OrderView.vue"),
-      },
+      
     ],
   },
   {
@@ -69,11 +82,14 @@ router.beforeEach((to, from, next) => {
   if (to.name == "home") {
     next({ path: "/" });
   }
-  if (to.name == "order" || to.name == "cart") {
+  if (to.name == "order" || to.name == "cart" || to.name == "account") {
     const token = getAccessToken();
     if (!token) {
       next({ name: "login" });
     }
+  }
+  if (to.name == "account") {
+    next({ name: "order" });
   }
   next();
 });

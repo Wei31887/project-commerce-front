@@ -7,3 +7,10 @@ export function addOrder(data) {
     data: data,
   });
 }
+
+export function listOrder() {
+  return request({
+    url: "/order/list",
+    method: "post",
+  });
+}

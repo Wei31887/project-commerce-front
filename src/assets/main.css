@@ -12,7 +12,8 @@ body,
     --background-color:  rgb(247, 247, 244);
     --div-color: rgb(241, 241, 241) ;
     --border-color: rgb(162, 162, 162);
-    --header-color: white;
+    --header-upper-color: white;
+    --header-lower-color: rgb(103, 165, 184);
     --footer-color: rgb(162, 162, 162);
     --login-background-color: rgb(242, 246, 238);
     --product-background-color: white;
@@ -21,5 +22,6 @@ body,
     --cart-card-color: white;
 
     /*  */
-    --header-height: 5rem;
+    --header-height: 7rem;
+    
 }
